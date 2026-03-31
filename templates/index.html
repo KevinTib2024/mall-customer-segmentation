@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Segmentación de Clientes</title>
+
+    <!-- Fuentes -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background: #0b0b0c;
+            color: #e5e5e5;
+        }
+
+        /* HERO */
+        .hero {
+            height: 50vh;
+            background: url('https://images.unsplash.com/photo-1607082350899-7e105aa886ae') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 50px;
+            letter-spacing: 3px;
+            color: #d4af37;
+        }
+
+        .hero p {
+            margin-top: 10px;
+            color: #ddd;
+        }
+
+        /* CONTENIDO */
+        .container {
+            padding: 40px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 14px;
+            padding: 20px;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            border-color: #d4af37;
+            transform: translateY(-5px);
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            color: #d4af37;
+        }
+
+        p {
+            color: #bbb;
+            line-height: 1.6;
+        }
+
+        /* TABLA */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th {
+            padding: 12px;
+            color: #d4af37;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+
+        td {
+            padding: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        tr:hover {
+            background: rgba(212,175,55,0.08);
+        }
+
+        /* BADGES */
+        .badge {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+
+        .c0 { background: #d4af37; color: black; }
+        .c1 { background: #444; }
+        .c2 { background: #777; }
+        .c3 { background: #222; }
+        .c4 { background: #555; }
+
+        .section {
+            margin-top: 40px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<!-- HERO -->
+<div class="hero">
+    <div class="hero-content">
+        <h1>CLIENT INSIGHTS</h1>
+        <p>Segmentación inteligente basada en datos</p>
+    </div>
+</div>
+
+<div class="container">
+
+    <div class="grid">
+        <div class="card">
+            <h2>Problemática</h2>
+            <p>No existe una segmentación clara de los clientes.</p>
+        </div>
+
+        <div class="card">
+            <h2>Objetivo</h2>
+            <p>Identificar grupos de clientes para mejorar estrategias.</p>
+        </div>
+
+        <div class="card">
+            <h2>Modelo</h2>
+            <p>Uso de K-Means con 5 clusters.</p>
+        </div>
+    </div>
+
+    <div class="card section">
+        <h2>Resultados</h2>
+
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Edad</th>
+                <th>Ingresos</th>
+                <th>Gasto</th>
+                <th>Cluster</th>
+            </tr>
+
+            {% for c in clientes %}
+            <tr>
+                <td>{{ c.CustomerID }}</td>
+                <td>{{ c.Age }}</td>
+                <td>{{ c["Annual Income (k$)"] }}</td>
+                <td>{{ c["Spending Score (1-100)"] }}</td>
+                <td>
+                    <span class="badge c{{ c.cluster }}">
+                        {{ c.cluster }}
+                    </span>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <div class="grid section">
+        <div class="card">
+            <h2>Interpretación</h2>
+            <p>Se identifican clientes premium, potenciales y básicos.</p>
+        </div>
+
+        <div class="card">
+            <h2>Conclusión</h2>
+            <p>Permite decisiones estratégicas más precisas.</p>
+        </div>
+
+        <div class="card">
+            <h2>Recomendaciones</h2>
+            <p>Optimizar marketing y fidelización.</p>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
