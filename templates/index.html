@@ -6,126 +6,8 @@
     <!-- Fuentes -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Inter', sans-serif;
-            background: #0b0b0c;
-            color: #e5e5e5;
-        }
-
-        /* HERO */
-        .hero {
-            height: 50vh;
-            background: url('https://images.unsplash.com/photo-1607082350899-7e105aa886ae') center/cover no-repeat;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: relative;
-        }
-
-        .hero::after {
-            content: "";
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.6);
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 50px;
-            letter-spacing: 3px;
-            color: #d4af37;
-        }
-
-        .hero p {
-            margin-top: 10px;
-            color: #ddd;
-        }
-
-        /* CONTENIDO */
-        .container {
-            padding: 40px;
-            max-width: 1200px;
-            margin: auto;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-        }
-
-        .card {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 14px;
-            padding: 20px;
-            transition: 0.3s;
-        }
-
-        .card:hover {
-            border-color: #d4af37;
-            transform: translateY(-5px);
-        }
-
-        h2 {
-            font-family: 'Playfair Display', serif;
-            color: #d4af37;
-        }
-
-        p {
-            color: #bbb;
-            line-height: 1.6;
-        }
-
-        /* TABLA */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        th {
-            padding: 12px;
-            color: #d4af37;
-            border-bottom: 1px solid rgba(255,255,255,0.2);
-        }
-
-        td {
-            padding: 10px;
-            border-bottom: 1px solid rgba(255,255,255,0.08);
-        }
-
-        tr:hover {
-            background: rgba(212,175,55,0.08);
-        }
-
-        /* BADGES */
-        .badge {
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 12px;
-        }
-
-        .c0 { background: #d4af37; color: black; }
-        .c1 { background: #444; }
-        .c2 { background: #777; }
-        .c3 { background: #222; }
-        .c4 { background: #555; }
-
-        .section {
-            margin-top: 40px;
-        }
-
-    </style>
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 
 <body>
@@ -133,32 +15,64 @@
 <!-- HERO -->
 <div class="hero">
     <div class="hero-content">
-        <h1>CLIENT INSIGHTS</h1>
-        <p>Segmentación inteligente basada en datos</p>
+        <h1>MALL CUSTOMERS</h1>
+        <p>Segmentación inteligente basada en análisis de datos</p>
     </div>
 </div>
 
 <div class="container">
 
+    <!-- SECCIÓN 1 -->
     <div class="grid">
         <div class="card">
             <h2>Problemática</h2>
-            <p>No existe una segmentación clara de los clientes.</p>
+            <p>
+                El centro comercial carece de un modelo analítico que permita segmentar a sus clientes con base en variables como edad, ingresos y comportamiento de consumo, limitando la toma de decisiones estratégicas.
+            </p>
         </div>
 
         <div class="card">
             <h2>Objetivo</h2>
-            <p>Identificar grupos de clientes para mejorar estrategias.</p>
+            <p>
+                Desarrollar un modelo de segmentación mediante técnicas de clustering para optimizar decisiones comerciales.
+            </p>
+        </div>
+
+        <div class="card">
+            <h2>Justificación</h2>
+            <p>
+                La segmentación permite identificar grupos homogéneos, mejorar estrategias de marketing y aumentar la rentabilidad.
+            </p>
+        </div>
+    </div>
+
+    <!-- SECCIÓN 2 -->
+    <div class="grid section">
+        <div class="card">
+            <h2>Metodología</h2>
+            <p>
+                Se utilizó el algoritmo K-Means implementado en scikit-learn. Se seleccionaron variables relevantes, se preprocesaron los datos y se aplicó el método del codo para definir el número óptimo de clusters.
+            </p>
         </div>
 
         <div class="card">
             <h2>Modelo</h2>
-            <p>Uso de K-Means con 5 clusters.</p>
+            <p>
+                K-Means agrupa datos minimizando la varianza intra-cluster. Se definió K=5 como valor óptimo para este caso.
+            </p>
+        </div>
+
+        <div class="card">
+            <h2>Resultados</h2>
+            <p>
+                Se identificaron cinco segmentos de clientes con comportamientos diferenciados.
+            </p>
         </div>
     </div>
 
+    <!-- TABLA -->
     <div class="card section">
-        <h2>Resultados</h2>
+        <h2>Datos Segmentados</h2>
 
         <table>
             <tr>
@@ -176,33 +90,94 @@
                 <td>{{ c["Annual Income (k$)"] }}</td>
                 <td>{{ c["Spending Score (1-100)"] }}</td>
                 <td>
-                    <span class="badge c{{ c.cluster }}">
-                        {{ c.cluster }}
-                    </span>
+                    <span class="badge c{{ c.cluster }}">{{ c.cluster }}</span>
                 </td>
             </tr>
             {% endfor %}
         </table>
     </div>
 
+    <!-- SECCIÓN 3 -->
     <div class="grid section">
         <div class="card">
             <h2>Interpretación</h2>
-            <p>Se identifican clientes premium, potenciales y básicos.</p>
+            <ul>
+                <li>Cluster 0: Clientes premium</li>
+                <li>Cluster 1: Potenciales</li>
+                <li>Cluster 2: Impulsivos</li>
+                <li>Cluster 3: Bajo valor</li>
+                <li>Cluster 4: Intermedios</li>
+            </ul>
         </div>
 
         <div class="card">
             <h2>Conclusión</h2>
-            <p>Permite decisiones estratégicas más precisas.</p>
+            <p>
+                La segmentación permite mejorar la toma de decisiones y optimizar estrategias comerciales.
+            </p>
         </div>
 
         <div class="card">
             <h2>Recomendaciones</h2>
-            <p>Optimizar marketing y fidelización.</p>
+            <ul>
+                <li>Fidelizar clientes premium</li>
+                <li>Incentivar gasto en clientes potenciales</li>
+                <li>Optimizar marketing</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- SECCIÓN 4 -->
+    <div class="grid section">
+        <div class="card">
+            <h2>Limitaciones</h2>
+            <p>
+                El modelo no considera variables externas como comportamiento digital o preferencias individuales.
+            </p>
+        </div>
+
+        <div class="card">
+            <h2>Trabajo Futuro</h2>
+            <p>
+                Se recomienda explorar modelos más avanzados y nuevas variables.
+            </p>
         </div>
     </div>
 
 </div>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="footer-container">
+
+        <div class="footer-section">
+            <h3>Client Insights</h3>
+            <p>Proyecto de Minería de Datos enfocado en segmentación de clientes.</p>
+        </div>
+
+        <div class="footer-section">
+            <h3>Tecnologías</h3>
+            <ul>
+                <li>Python</li>
+                <li>Flask</li>
+                <li>Pandas</li>
+                <li>Scikit-learn</li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h3>Autores</h3>
+            <ul>
+                <li>Kevin Alexander Tibaquichá Ortiz</li>
+            </ul>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        © 2026 Proyecto Académico | Ingeniería de Sistemas
+    </div>
+</footer>
 
 </body>
 </html>
